@@ -34,7 +34,6 @@ void SemaphoreP(P_SEMAPHORE s)
 void SemaphoreV(P_SEMAPHORE s)
 {
 	P_TASK p;
-	size_t cpsr;
 	size_t sr = DisableInterrupt();
 
 	++s->value;

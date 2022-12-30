@@ -212,6 +212,7 @@ ptrdiff_t KExit(ptrdiff_t value)
 	if (wk1)
 		KWakeup((ptrdiff_t)&gTasks[1]);
 	TaskSwitch();
+	return 0;
 }
 
 ptrdiff_t KWait(size_t * status)

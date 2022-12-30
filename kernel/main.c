@@ -24,12 +24,11 @@ void task1(void)
 
 int main()
 {
-	int i;
-
 
 	KFork(task1, 1);
 	
-	while (1) {   // P0 loop
+	while (1)
+	{
 		if (gpReadyQueue)
 			TaskSwitch();
 	}

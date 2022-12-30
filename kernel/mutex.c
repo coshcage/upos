@@ -14,7 +14,7 @@ extern P_TASK gpReadyQueue;
 
 BOOL MutexLock(P_MUTEX s)
 {
-	P_TASK p, q, temp;  /* Current owner if mutex is locked. */
+	P_TASK q, temp;  /* Current owner if mutex is locked. */
 
 	size_t sr = DisableInterrupt();
 	// printf("TASK%d locking mutex: ", running->pid);
