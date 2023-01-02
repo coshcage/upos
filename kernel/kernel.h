@@ -58,12 +58,12 @@ typedef struct st_TASK {
 
 extern size_t DisableInterrupt(void);
 extern void   EnableInterrupt (size_t sr);
-extern void TaskSwitch(void);
+extern void   TaskSwitch(void);
 extern size_t GetCPSR(void);
 
 P_TASK GetTask(P_TASK * list);
-void PutTask(P_TASK * list, P_TASK p);
-void Enqueue(P_TASK * queue, P_TASK p);
+void   PutTask(P_TASK * list, P_TASK p);
+void   Enqueue(P_TASK * queue, P_TASK p);
 P_TASK Dequeue(P_TASK * queue);
 
 void SemaphoreP(P_SEMAPHORE s);
@@ -77,8 +77,8 @@ void Scheduler(void);
 void Reschedule(void);
 void Schedule(void);
 ptrdiff_t KFork(void (*func)(void), ptrdiff_t priority);
-void KSleep(ptrdiff_t event);
-void KWakeup(ptrdiff_t event);
+void      KSleep(ptrdiff_t event);
+void      KWakeup(ptrdiff_t event);
 ptrdiff_t KExit(ptrdiff_t value);
 ptrdiff_t KWait(size_t * status);
 

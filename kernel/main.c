@@ -25,6 +25,7 @@ void task1(void)
 int main()
 {
 
+	InitKernel();
 	KFork(task1, 1);
 	
 	while (1)
