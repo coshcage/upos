@@ -12,6 +12,14 @@
 extern P_TASK gpRunning;
 extern P_TASK gpReadyQueue;
 
+void InitMutex(P_MUTEX m)
+{
+	m->lock     = OFF;
+	m->owner    = NULL;
+	m->priority = 0;
+	m->queue    = NULL;
+}
+
 BOOL MutexLock(P_MUTEX s)
 {
 	P_TASK q, temp;  /* Current owner if mutex is locked. */

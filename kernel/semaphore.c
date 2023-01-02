@@ -12,8 +12,11 @@
 extern P_TASK gpRunning;
 extern P_TASK gpReadyQueue;
 
-extern ptrdiff_t gSwitchFlag;
-extern ptrdiff_t gIntNest;
+void InitSemaphore(P_SEMAPHORE s)
+{
+	s->value = 0;
+	s->queue = NULL;
+}
 
 void SemaphoreP(P_SEMAPHORE s)
 {

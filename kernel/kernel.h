@@ -12,7 +12,7 @@
 
 #include "osdef.h"
 
-#define  STACK_SIZE (4096)
+#define STACK_SIZE (4096)
 #define NTASK (5)
 
 typedef enum en_TASK_STATUS {
@@ -39,7 +39,7 @@ typedef struct st_SEMAPHORE {
 typedef struct st_TASK {
 	struct st_TASK * pnext;
 	struct st_TASK * pparent;
-	ptrdiff_t *      ksp;
+	size_t *         ksp;
 	ptrdiff_t        pid;
 	ptrdiff_t        ppid;
 	ptrdiff_t        priority;    /* Created priority. */
@@ -49,9 +49,9 @@ typedef struct st_TASK {
 	ptrdiff_t        event;
 	ptrdiff_t        exitCode;
 
-	struct st_MUTEX * mp;           // point to mutex this PROC is blocked on
-	struct st_SEMAPHORE * s;         // point to semaphore this PROC is blocked on
-	ptrdiff_t     pstack[STACK_SIZE];
+	struct st_MUTEX *     mp;           // point to mutex this task is blocked on
+	struct st_SEMAPHORE * s;         // point to semaphore this task is blocked on
+	size_t pstack[STACK_SIZE];
 } TASK, * P_TASK;
 
 #define VIC_BASE_ADDR (0x10140000)
@@ -66,9 +66,11 @@ void   PutTask(P_TASK * list, P_TASK p);
 void   Enqueue(P_TASK * queue, P_TASK p);
 P_TASK Dequeue(P_TASK * queue);
 
+void InitSemaphore(P_SEMAPHORE s);
 void SemaphoreP(P_SEMAPHORE s);
 void SemaphoreV(P_SEMAPHORE s);
 
+void InitMutex(P_MUTEX m);
 BOOL MutexLock(P_MUTEX s);
 BOOL MutexUnlock(P_MUTEX s);
 

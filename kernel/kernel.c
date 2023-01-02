@@ -34,8 +34,8 @@ void InitKernel(void)
 	// kprintf("kernel_init(): ");
 	for (i = 0; i < NTASK; ++i)
 	{
-		p		  = &gTasks[i];
-		p->pid	 = i;
+		p		   = &gTasks[i];
+		p->pid	   = i;
 		p->status  = TS_READY;
 		p->runTime = 0;
 		p->pnext   = p + 1;
