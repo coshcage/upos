@@ -45,7 +45,7 @@ BOOL MutexLock(P_MUTEX s)
 			//printf("RAISE PROC%d PRIORITY to %d\n", s->owner->pid, s->owner->priority);
 			/* Re-order gpReadyQueue. */
 			temp = NULL;
-			while (q = Dequeue(&gpReadyQueue))
+			while (NULL != (q = Dequeue(&gpReadyQueue)))
 				Enqueue(&temp, q);
 			gpReadyQueue = temp;
 		}
