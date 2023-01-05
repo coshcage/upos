@@ -37,21 +37,21 @@ irq_handler:
 	sub	lr, lr, #4
 	stmfd sp!, {r0-r12, lr}
 	mrs r0, spsr
-	stmfd sp!, {r0}  // push SPSR
+	stmfd sp!, {r0} // push SPSR
 
-	ldr r0, =gIntNest        // r0->intnest
+	ldr r0, =gIntNest // r0->intnest
 	ldr r1, [r0]
 	add r1, #1
-	str r1, [r0]            // intnest++
+	str r1, [r0] // intnest++
 
-	mov r1, sp              // get irq sp into r1
-	ldr sp, =irq_stack_top  // reset IRQ stack poiner to IRQ stack top
+	mov r1, sp // get irq sp into r1
+	ldr sp, =irq_stack_top // reset IRQ stack poiner to IRQ stack top
 
-	// switch to SVC mode   // to allow nested IRQs: must clear interrupt source
-	msr cpsr, #0x93       // to SVC mode with interrupts OFF
+	// switch to SVC mode // to allow nested IRQs: must clear interrupt source
+	msr cpsr, #0x93 // to SVC mode with interrupts OFF
 
-	sub sp, #60           // dec SVC mode sp by 14 entries
-	mov r0, sp            // r0=SVC stack top
+	sub sp, #60 // dec SVC mode sp by 14 entries
+	mov r0, sp // r0=SVC stack top
 	// copy IRQ stack to SVC stack
 	mov r3, #15        // 15 times
 
@@ -64,14 +64,14 @@ isan:
 
 	// read vectoraddress register: MUST!!! else no interrupts
 	ldr  r1, =vectorAddr
-	ldr  r0, [r1]  // read vectorAddr register to ACK interrupt
+	ldr  r0, [r1] // read vectorAddr register to ACK interrupt
 
 	stmfd sp!, {r0-r3, lr}
 
-	msr cpsr, #0x13     // still in SVC mode but enable IRQ
-	//  msr cpsr, #0x93     // still in SVC mode but enable IRQ
+	msr cpsr, #0x13 // still in SVC mode but enable IRQ
+	//  msr cpsr, #0x93 // still in SVC mode but enable IRQ
 
-	bl irq_chandler  // handle interrupt in SVC mode, IRQ off
+	bl irq_chandler // handle interrupt in SVC mode, IRQ off
 
 	msr cpsr, #0x93
 	ldmfd sp!, {r0-r3, lr}
@@ -79,41 +79,41 @@ isan:
 	ldr r0, =gIntNest
 	ldr r1, [r0]
 	sub r1, #1
-	str r1, [r0]            // intnest--
-	cmp r1, #0              // if intnest != 0 => no_switch
-	bne no_switch
+	str r1, [r0] // intnest--
+	cmp r1, #0 // if intnest != 0 => NoSwitch
+	bne NoSwitch
 
 	// intnest==0: END OF IRQs: if swflag=1: switch task 	
 	ldr r0, =gSwitchFlag
 	ldr r0, [r0]
 	cmp r0, #0
-	bne do_switch           // if swflag=0: no task switch
+	bne DoSwitch // if swflag=0: no task switch
 
-no_switch:	
+NoSwitch:	
 	ldmfd sp!, {r0}
-	msr   spsr, r0    // restore SPSR
+	msr   spsr, r0 // restore SPSR
 
 	// irq_chandler() already issued EOI
 
-	ldmfd sp!, {r0-r12, pc}^  // return via SVC stack
+	ldmfd sp!, {r0-r12, pc}^ // return via SVC stack
 
-do_switch:	         // still in IRQ mode
-	// bl endIRQ              // show "at end of IRQs"
+DoSwitch: // still in IRQ mode
+	// bl endIRQ // show "at end of IRQs"
 
 	// will switch task, so must issue EOI
 	ldr  r1, =vectorAddr
-	str  r0, [r1]          // issue EOI  
+	str  r0, [r1] // issue EOI  
 
-	bl TaskSwitch             // call tswitch(): resume to here
+	bl TaskSwitch // call tswitch(): resume to here
 
 	// will switch task, so must issue EOI
 	//  ldr  r1, =vectorAddr
-	//  str  r0, [r1]          // issue EOI  
+	//  str  r0, [r1] // issue EOI  
 
 	ldmfd sp!, {r0}
 	msr   spsr, r0
 
-	ldmfd sp!, {r0-r12, pc}^  // return via SVC stack
+	ldmfd sp!, {r0-r12, pc}^ // return via SVC stack
 
 TaskSwitch:
 	//       1  2  3  4  5  6  7  8  9  10  11  12  13 14
@@ -134,7 +134,7 @@ TaskSwitch:
 	bl Scheduler
 
 	ldr r0, =gpRunning
-	ldr r1, [r0, #0]  // r1->running task.
+	ldr r1, [r0, #0] // r1->running task.
 	ldr sp, [r1, #4]
 
 	// Enable IRQ interrupts.
@@ -157,13 +157,13 @@ EnableInterrupt: // EnableInterrupt(size_t sr)
 
 LockIRQ:
 	mrs r0, cpsr
-	orr r0, r0, #0x80   // Set bit means mask off IRQ interrupt.
+	orr r0, r0, #0x80 // Set bit means mask off IRQ interrupt.
 	msr cpsr, r0
 	mov pc, lr	
 
 UnlockIRQ:	
 	mrs r0, cpsr
-	bic r0, r0, #0x80   // Clear bit means unmask IRQ interrupt.
+	bic r0, r0, #0x80 // Clear bit means unmask IRQ interrupt.
 	msr cpsr, r0
 	mov pc, lr	
 

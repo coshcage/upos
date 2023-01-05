@@ -2,7 +2,7 @@
  * Name:        kernel.c
  * Description: Kernel functions.
  * Author:      K.C.Wang; cosh.cage#hotmail.com
- * File ID:     1208220252C1229221931L00280
+ * File ID:     1208220252C1229221931L00281
  * License:     GPLv3
  *
  */

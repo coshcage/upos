@@ -2,7 +2,7 @@
  * Name:        semaphore.c
  * Description: Semaphore.
  * Author:      K.C.Wang; cosh.cage#hotmail.com
- * File ID:     1208220252E1229221931L00054
+ * File ID:     1208220252E1229221931L00057
  * License:     GPLv3
  *
  */
@@ -30,6 +30,7 @@ void SemaphoreP(P_SEMAPHORE s)
 		Enqueue(&s->queue, gpRunning);
 		EnableInterrupt(sr);
 		TaskSwitch();
+		return;
 	}
 	EnableInterrupt(sr);
 }

@@ -2,7 +2,7 @@
  * Name:        queue.c
  * Description: Queue.
  * Author:      K.C.Wang; cosh.cage#hotmail.com
- * File ID:     1208220252D1229221931L00116
+ * File ID:     1208220252D1229221931L00065
  * License:     GPLv3
  *
  */
@@ -62,55 +62,3 @@ P_TASK Dequeue(P_TASK * queue)
 	EnableInterrupt(sr);
 	return p;
 }
-
-/*
-int printQ(PROC * p)
-{
-	printf("readyQueue=");
-	while (p) {
-		printf("[%d%d]->", p->pid, p->priority);
-		p = p->next;
-	}
-	printf("Nil\n");
-}
-
-int printQueue(PROC * p)
-{
-	while (p) {
-		printf("[%d%d]->", p->pid, p->priority);
-		p = p->next;
-	}
-	printf("NULL\n");
-}
-
-
-
-int printSleepList(PROC * p)
-{
-	printf("sleepList   = ");
-	while (p) {
-		printf("[%d%d]->", p->pid, p->event);
-		p = p->next;
-	}
-	printf("NULL\n");
-}
-
-int printList(PROC * p)
-{
-	printf("freeList=");
-	while (p) {
-		printf("[%d]->", p->pid);
-		p = p->next;
-	}
-	printf("NULL\n");
-}
-
-int printlist(PROC * p)
-{
-	while (p) {
-		printf("[%d]->", p->pid);
-		p = p->next;
-	}
-	printf("NULL\n");
-}
-*/

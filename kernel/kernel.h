@@ -2,7 +2,7 @@
  * Name:        kernel.h
  * Description: Kernel definitions.
  * Author:      K.C.Wang; cosh.cage#hotmail.com
- * File ID:     1208220252A1229221931L00095
+ * File ID:     1208220252A1229221931L00097
  * License:     GPLv3
  *
  */
@@ -42,15 +42,15 @@ typedef struct st_TASK {
 	size_t *         ksp;
 	ptrdiff_t        pid;
 	ptrdiff_t        ppid;
-	ptrdiff_t        priority;    /* Created priority. */
+	ptrdiff_t        priority;     /* Created priority. */
 	ptrdiff_t        realPriority; /* Current priority; Same as created when start. */
 	ptrdiff_t        runTime;
 	TASK_STATUS      status;
 	ptrdiff_t        event;
 	ptrdiff_t        exitCode;
 
-	struct st_MUTEX *     mp;           // point to mutex this task is blocked on
-	struct st_SEMAPHORE * s;         // point to semaphore this task is blocked on
+	struct st_MUTEX *     mp;       /* Point to mutex this task is blocked on. */
+	struct st_SEMAPHORE * s;        /* Point to semaphore this task is blocked on. */
 	size_t pstack[STACK_SIZE];
 } TASK, * P_TASK;
 
