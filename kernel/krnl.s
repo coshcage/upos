@@ -53,12 +53,12 @@ irq_handler:
 	sub sp, #60 // dec SVC mode sp by 14 entries
 	mov r0, sp // r0=SVC stack top
 	// copy IRQ stack to SVC stack
-	mov r3, #15        // 15 times
+	mov r3, #15 // 15 times
 
 isan:	
-	ldr r2, [r1], #4   // get an entry from IRQ stack
-	str r2, [r0], #4   // write to proc's kstack
-	sub r3, #1         // copy 14 entries from IRQ stack to PROC's kstack
+	ldr r2, [r1], #4 // get an entry from IRQ stack
+	str r2, [r0], #4 // write to proc's kstack
+	sub r3, #1 // copy 14 entries from IRQ stack to PROC's kstack
 	cmp r3, #0
 	bne isan
 
@@ -147,7 +147,7 @@ TaskSwitch:
 DisableInterrupt: // size_t sr = DisableInterrupt(); Return old cpsr.
 	mrs r4, cpsr
 	mov r0, r4
-	orr r4, r4, #0x80   // Set bit to mask off IRQ interrupts.
+	orr r4, r4, #0x80 // Set bit to mask off IRQ interrupts.
 	msr cpsr, r4
 	mov pc, lr	
 
