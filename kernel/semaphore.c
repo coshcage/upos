@@ -14,7 +14,7 @@ extern P_TASK gpReadyQueue;
 
 void InitSemaphore(P_SEMAPHORE s)
 {
-	s->value = 0;
+	s->value = 1;
 	s->queue = NULL;
 }
 
