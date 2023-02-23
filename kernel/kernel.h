@@ -66,7 +66,7 @@ void   PutTask(P_TASK * list, P_TASK p);
 void   Enqueue(P_TASK * queue, P_TASK p);
 P_TASK Dequeue(P_TASK * queue);
 
-void InitSemaphore(P_SEMAPHORE s);
+void InitSemaphore(P_SEMAPHORE s, ptrdiff_t value);
 void SemaphoreP(P_SEMAPHORE s);
 void SemaphoreV(P_SEMAPHORE s);
 
