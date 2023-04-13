@@ -3,7 +3,7 @@
  * Description: Startup.
  * Author:      K.C.Wang; cosh.cage#hotmail.com
  * File ID:     1208220252H1229221931L00037
- * License:     GPLv3
+ * License:     LGPLv2
  *
  */
 

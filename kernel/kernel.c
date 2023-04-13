@@ -3,7 +3,7 @@
  * Description: Kernel functions.
  * Author:      K.C.Wang; cosh.cage#hotmail.com
  * File ID:     1208220252C0413231619L00286
- * License:     GPLv3
+ * License:     LGPLv2
  *
  */
 

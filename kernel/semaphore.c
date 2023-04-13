@@ -3,7 +3,7 @@
  * Description: Semaphore.
  * Author:      K.C.Wang; cosh.cage#hotmail.com
  * File ID:     1208220252E1229221931L00057
- * License:     GPLv3
+ * License:     LGPLv2
  *
  */
 

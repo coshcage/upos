@@ -3,7 +3,7 @@
  * Description: Queue.
  * Author:      K.C.Wang; cosh.cage#hotmail.com
  * File ID:     1208220252D1229221931L00065
- * License:     GPLv3
+ * License:     LGPLv2
  *
  */
 

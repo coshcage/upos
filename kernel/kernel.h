@@ -3,7 +3,7 @@
  * Description: Kernel definitions.
  * Author:      K.C.Wang; cosh.cage#hotmail.com
  * File ID:     1208220252A0413231619L00097
- * License:     GPLv3
+ * License:     LGPLv2
  *
  */
 
