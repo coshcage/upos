@@ -12,9 +12,9 @@
 extern P_TASK gpRunning;
 extern P_TASK gpReadyQueue;
 
-void InitSemaphore(P_SEMAPHORE s, ptrdiff_t value)
+void InitSemaphore(P_SEMAPHORE s)
 {
-	s->value = value;
+	s->value = 0;
 	s->queue = NULL;
 }
 

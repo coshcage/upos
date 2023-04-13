@@ -2,7 +2,7 @@
  * Name:        kernel.h
  * Description: Kernel definitions.
  * Author:      K.C.Wang; cosh.cage#hotmail.com
- * File ID:     1208220252A1229221931L00097
+ * File ID:     1208220252A0413231619L00097
  * License:     GPLv3
  *
  */
@@ -66,7 +66,7 @@ void   PutTask(P_TASK * list, P_TASK p);
 void   Enqueue(P_TASK * queue, P_TASK p);
 P_TASK Dequeue(P_TASK * queue);
 
-void InitSemaphore(P_SEMAPHORE s, ptrdiff_t value);
+void InitSemaphore(P_SEMAPHORE s);
 void SemaphoreP(P_SEMAPHORE s);
 void SemaphoreV(P_SEMAPHORE s);
 
@@ -84,13 +84,13 @@ void      KWakeup(ptrdiff_t event);
 ptrdiff_t KExit(ptrdiff_t value);
 ptrdiff_t KWait(size_t * status);
 
-void undef_handler(void);
-void swi_handler(void);
-void prefetch_abort_handler(void); 
-void data_abort_handler(void);
-void fiq_handler(void);
+void UndefHandler(void);
+void SwiHandler(void);
+void PrefetchAbortHandler(void); 
+void DataAbortHandler(void);
+void FiqHandler(void);
 
-void irq_chandler(void);
-void copy_vectors(void);
+void IrqCHandler(void);
+void CopyVectors(void);
 
 #endif

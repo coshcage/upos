@@ -2,7 +2,7 @@
  * Name:        kernel.c
  * Description: Kernel functions.
  * Author:      K.C.Wang; cosh.cage#hotmail.com
- * File ID:     1208220252C1229221931L00281
+ * File ID:     1208220252C0413231619L00286
  * License:     GPLv3
  *
  */
@@ -10,6 +10,7 @@
 #include "kernel.h"
 
 TASK gTasks[NTASK];
+P_TASK gTask = gTasks;
 P_TASK gpRunning = NULL, gpFreeList = NULL, gpReadyQueue = NULL, gpSleepList = NULL;
 
 size_t gTaskSize = sizeof(TASK);
@@ -261,20 +262,24 @@ ptrdiff_t KWait(size_t * status)
 	}
 }
 
-void copy_vectors(void) {
-	extern size_t vectors_start;
-	extern size_t vectors_end;
-	size_t * vectors_src = &vectors_start;
-	size_t * vectors_dst = NULL;
+void CopyVectors(void) {
+	extern size_t VectorsStart;
+	extern size_t VectorsEnd;
+	size_t * vectorsSrc = &VectorsStart;
+	size_t * vectorsDst = NULL;
 
-	while (vectors_src < &vectors_end)
-		*vectors_dst++ = *vectors_src++;
+	while (vectorsSrc < &VectorsEnd)
+		*vectorsDst++ = *vectorsSrc++;
 }
 
-void irq_chandler(void)
+void IrqCHandler(void)
 {
-	int (*f)();						 // f is a function pointer
-	f = (void *)*((int *)(VIC_BASE_ADDR + 0x30)); // read ISR address in vectorAddr
-	f();								// call the ISR function
-	*((int *)(VIC_BASE_ADDR + 0x30)) = 1; // write to VIC vectorAddr reg as EOI
+	/* f is a function pointer. */
+	int (*f)();
+	/* Read ISR address in vectorAddr. */
+	f = (void *)*((int *)(VIC_BASE_ADDR + 0x30));
+	/* call the ISR function */
+	f();
+	/* Write to VIC vectorAddr reg as EOI. */
+	*((int *)(VIC_BASE_ADDR + 0x30)) = 1;
 }
